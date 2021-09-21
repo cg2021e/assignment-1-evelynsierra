@@ -6,16 +6,20 @@
 
 ## Top Front
 
-![egg1] (img/top front.jpg)
+![top front](https://user-images.githubusercontent.com/55088939/134111453-7a939bbc-30a2-466f-9dab-dd0b5ade3edd.jpg)
+
 
 ## Top Left
 
-![egg2] (img/top left.jpg)
+![top left](https://user-images.githubusercontent.com/55088939/134111458-37b7c119-6e15-405b-ac06-7e55ab517fcf.jpg)
+
 
 ## Top Right
 
-![egg3] (img/top right.jpg)
+![top right](https://user-images.githubusercontent.com/55088939/134111465-a760aa22-6d64-4b79-9c62-698721e09771.jpg)
+
 
 ## Top Rear
 
-![egg4] (img/top rear.jpg)
+![top rear](https://user-images.githubusercontent.com/55088939/134111461-f7e3f9bc-13e6-42b3-9798-e6400080da1f.jpg)
+
