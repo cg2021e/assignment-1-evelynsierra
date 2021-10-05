@@ -23,3 +23,5 @@ From the object or image that I had from the previous task, in this task we were
 6. The shape as shown in another selected photo is rendered on the right side of the Canvas: Located in the clip space between X = 0.0 and X = 1.0 axes.  
 7. The rendering result on the right side of the Canvas is animated vertically, bouncing back between the top and the bottom walls of the Canvas, with a speed of 0.0xxx units, where xxx is the last three digits of the NRP.  
 8. Do not forget to commit and push the changes. 
+
+ <a href = "https://cg2021e.github.io/assignment-1-evelynsierra/" target="_blank"> Results </a>
