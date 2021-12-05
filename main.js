@@ -2,12 +2,220 @@ function main(){
     var canvas = document.getElementById("Canvas");
     var gl = canvas.getContext("webgl");
 
+    // var cube = [
+    //     0.136917 ,0.338991, -0.943038, 0.000000,  -1.000000 ,-0.000002 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.338990, -0.550854, 0.000000, -1.000000 ,-0.000002 ,0.364, 0.337, 0.298,
+    //     -0.137615 ,0.338991, -0.943042, 0.000000, -1.000000, -0.000002 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.206204, -0.550854, 0.000000, -0.000001 ,-1.000000 ,0.364, 0.337, 0.298,
+    //     0.139338 ,0.338990, -0.550854, 0.000000,  -0.000001 ,-1.000000 ,0.364, 0.337, 0.298,
+    //     0.139338 ,0.206204, -0.550854, 0.000000,  -0.000001 ,-1.000000 ,0.37254902, 0.345098039, 0.305882353, 
+    //     0.139338 ,0.338990, -0.550854, -0.999981,  0.000000 ,0.006173 ,0.364, 0.337, 0.298,
+    //     0.136917 ,0.206260, -0.943038, -0.999981, 0.000000 ,0.006173 ,0.37254902, 0.345098039, 0.305882353, 
+    //     0.139338 ,0.206204, -0.550854, -0.999981,  0.000000 ,0.006173 ,0.37254902, 0.345098039, 0.305882353, 
+    //     0.136917 ,0.206260, -0.943038, 0.000001,   1.000000 ,0.000143 ,0.37254902, 0.345098039, 0.305882353, 
+    //     -0.136506 ,0.206204, -0.550854, 0.000001, 1.000000 ,0.000143 ,0.364, 0.337, 0.298,
+    //     0.139338 ,0.206204, -0.550854, 0.000001,   1.000000 ,0.000143 ,0.37254902, 0.345098039, 0.305882353, 
+    //     -0.137615 ,0.338991, -0.943042, 0.999996,  -0.000000 ,-0.002827 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.206204, -0.550854, 0.999996,  -0.000000 ,-0.002827 ,0.364, 0.337, 0.298,
+    //     -0.137615 ,0.206200, -0.943042, 0.999996,  -0.000000 ,-0.002827 ,0.364, 0.337, 0.298,
+    //     0.136917 ,0.206260, -0.943038, -0.000014,  -0.000001 ,1.000000 ,0.37254902, 0.345098039, 0.305882353, 
+    //     -0.137615 ,0.338991, -0.943042, -0.000014,  -0.000001 ,1.000000 ,0.364, 0.337, 0.298,
+    //     -0.137615 ,0.206200, -0.943042, -0.000014, -0.000001 ,1.000000 ,0.364, 0.337, 0.298,
+    //     -0.126922 ,0.326281, -0.417096, -1.000000, -0.000001 ,0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.593732, -1.000000, -0.000001 ,0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.417096, -1.000000, -0.000001 ,0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.326281, -0.593732, 0.000000, 0.000000 ,-1.000000 ,0.11372549, 0.129411765, 0.196078431, 
+    //     0.130597 ,0.223447, -0.593732, 0.000000, 0.000000 ,-1.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.593732, 0.000000, 0.000000 ,-1.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130597 ,0.326281, -0.593732, 1.000000, 0.000000 ,0.000012 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130595 ,0.223447, -0.417824, 1.000000, 0.000000 ,0.000012 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130597 ,0.223447, -0.593732, 1.000000, 0.000000 ,0.000012 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130595 ,0.326281, -0.417824, 0.002828, 0.000000 ,0.999996 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.417096, 0.002828, 0.000000 ,0.999996 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130595 ,0.223447, -0.417824, 0.002828, 0.000000 ,0.999996 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.593732, 0.000000, -1.000000 ,-0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130595 ,0.223447, -0.417824, 0.000000,  -1.000000 ,-0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.223447, -0.417096, 0.000000, -1.000000 ,-0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.326281, -0.593732, 0.000000, 1.000000 ,0.000000 ,0.11372549, 0.129411765, 0.196078431, 
+    //     0.130595 ,0.326281, -0.417824, 0.000000, 1.000000 ,0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130597 ,0.326281, -0.593732, 0.000000, 1.000000 ,0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.139338 ,0.338990, -0.550854, 0.000000, -1.000000 ,-0.000002 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.206204, -0.550854, 0.000000, -0.000000 ,-1.000000 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.338990, -0.550854, 0.000000, -0.000000 ,-1.000000 ,0.364, 0.337, 0.298,
+    //     0.139338 ,0.338990, -0.550854, 0.000000, -0.000000 ,-1.000000 ,0.364, 0.337, 0.298,
+    //     0.136917 ,0.338991, -0.943038, -0.999981,  -0.000000 ,0.006173 ,0.364, 0.337, 0.298,
+    //     0.136917 ,0.206260, -0.943038, -0.000219, 1.000000 -0.000010 ,0.37254902, 0.345098039, 0.305882353, 
+    //     -0.137615 ,0.206200, -0.943042, -0.000219, 1.000000 ,-0.000010 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.206204, -0.550854, -0.000219, 1.000000 ,-0.000010 ,0.364, 0.337, 0.298,
+    //     -0.137615 ,0.338991, -0.943042, 0.999996, -0.000003 ,-0.002828 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.338990, -0.550854, 0.999996, -0.000003 ,-0.002828 ,0.364, 0.337, 0.298,
+    //     -0.136506 ,0.206204, -0.550854, 0.999996, -0.000003 ,-0.002828 ,0.364, 0.337, 0.298,
+    //     0.136917 ,0.338991, -0.943038, -0.000014, -0.000001 ,1.000000 ,0.364, 0.337, 0.298,
+    //     -0.126922 ,0.326281, -0.417096, -1.000000, 0.000000, -0.000001 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.326281, -0.593732, -1.000000, 0.000000, -0.000001 ,0.11372549, 0.129411765, 0.196078431, 
+    //     -0.126922 ,0.223447, -0.593732, -1.000000, 0.000000, -0.000001 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130597 ,0.326281, -0.593732, 0.000000, 0.000000, -1.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130595 ,0.326281, -0.417824, 1.000000, -0.000000 ,0.000012 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.326281, -0.417096, 0.002828, 0.000000 ,0.999996 ,0.090196078, 0.109803922, 0.180392157, 
+    //     0.130597 ,0.223447, -0.593732, -0.000000, -1.000000, -0.000000 ,0.090196078, 0.109803922, 0.180392157, 
+    //     -0.126922 ,0.326281, -0.417096, 0.000000, 1.000000 ,0.000000 ,0.090196078, 0.109803922, 0.180392157,
+
+    //     // -0.050000, 0.320884, -0.050000, 0.000000, 0.000000, -1.000000, 1,1,1,
+    //     // 0.050000, 0.220884, -0.050000, 0.000000, 0.000000, -1.000000, 1,1,1,
+    //     // -0.050000, 0.220884, -0.050000, 0.000000, 0.000000, -1.000000, 1,1,1,
+    //     // 0.050000, 0.320884, -0.050000, 1.000000, -0.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.220884, 0.050000, 1.000000, -0.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.220884, -0.050000, 1.000000, -0.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.320884, 0.050000, 0.000000, -0.000000, 1.000000, 1,1,1,
+    //     // -0.050000, 0.220884, 0.050000, 0.000000, -0.000000, 1.000000, 1,1,1,
+    //     // 0.050000, 0.220884, 0.050000, 0.000000, -0.000000, 1.000000, 1,1,1,
+    //     // -0.050000, 0.320884, 0.050000, -1.000000, 0.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.220884, -0.050000, -1.000000, 0.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.220884, 0.050000, -1.000000, 0.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.220884, 0.050000, 0.000000, -1.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.220884, -0.050000, 0.000000, -1.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.220884, -0.050000, 0.000000, -1.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.320884, -0.050000, 0.000000, 1.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.320884, 0.050000, 0.000000, 1.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.320884, 0.050000, 0.000000, 1.000000, 0.000000, 1,1,1,
+    //     // 0.050000, 0.320884, -0.050000, 0.000000, 0.000000, -1.000000, 1,1,1,
+    //     // 0.050000, 0.320884, 0.050000, 1.000000, -0.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.320884, 0.050000, 0.000000, 0.000000, 1.000000, 1,1,1,
+    //     // -0.050000, 0.320884, -0.050000, -1.000000, 0.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.220884, 0.050000, 0.000000, -1.000000, 0.000000, 1,1,1,
+    //     // -0.050000, 0.320884, -0.050000, -0.000000, 1.000000, 0.000000, 1,1,1,
+
+    //     // 0.141597, 0.338991, 0.940471, 0.000000, -1.000000, 0.000002, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.338990, 0.548287, 0.000000, -1.000000, 0.000002, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.338990, 0.548287, 0.000000, -1.000000, 0.000002, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.206204, 0.548287, -0.000000, 0.000000, 1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.338990, 0.548287, -0.000000, 0.000000, 1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136669, 0.206204, 0.548287, -0.000000, 0.000000, 1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136669, 0.206204, 0.548287, 1.000000, 0.000000, -0.000215, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.338991, 0.940471, 1.000000, 0.000000, -0.000215, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.206200, 0.940471, 1.000000, 0.000000, -0.000215, 0.525490196, 0.482352941, 0.423529412,
+    //     // -0.136585, 0.206200, 0.940471, -0.000000, 1.000000, 0.000010, 0.525490196, 0.482352941, 0.423529412,
+    //     // 0.141597, 0.206204, 0.548287, -0.000000, 1.000000, 0.000010, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136669, 0.206204, 0.548287, -0.000000, 1.000000, 0.000010, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.338991, 0.940471, -1.000000, 0.000002, -0.000001, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.206204, 0.548287, -1.000000, 0.000002, -0.000001, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141596, 0.206200, 0.940471, -1.000000, 0.000002, -0.000001, 0.568627451,0.521568627,0.450980392,
+    //     // -0.136585, 0.338991, 0.940471, -0.000000, 0.000000, -1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141596, 0.206200, 0.940471, -0.000000, 0.000000, -1.000000, 0.568627451,0.521568627,0.450980392,
+    //     // -0.136585, 0.206200, 0.940471, -0.000000, 0.000000, -1.000000, 0.525490196, 0.482352941, 0.423529412,
+    //     // 0.129591, 0.223447, 0.414529, 1.000000, -0.000000, 0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.326281, 0.591165, 1.000000, -0.000000, 0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.223447, 0.591165, 1.000000, -0.000000, 0.000000, 0.152941176, 0.164705882, 0.211764706,
+    //     // 0.129591, 0.326281, 0.591165, 0.000000, -0.000000, 1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.591165, 0.000000, -0.000000, 1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.223447, 0.591165, 0.000000, -0.000000, 1.000000, 0.152941176, 0.164705882, 0.211764706,
+    //     // -0.127928, 0.326281, 0.591165, -1.000000, 0.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.414529, -1.000000, 0.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.591165, -1.000000, 0.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.414529, -0.000000, 0.000000, -1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129506, 0.326281, 0.414529, -0.000000, 0.000000, -1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.223447, 0.414529, -0.000000, 0.000000, -1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.591165, -0.000000, -1.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.223447, 0.414529, -0.000000, -1.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.223447, 0.591165, -0.000000, -1.000000, -0.000000, 0.152941176, 0.164705882, 0.211764706,
+    //     // -0.127928, 0.326281, 0.591165, 0.000000, 1.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129506, 0.326281, 0.414529, 0.000000, 1.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.326281, 0.414529, 0.000000, 1.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.136585, 0.338991, 0.940471, 0.000000, -1.000000, 0.000002, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.338990, 0.548287, -0.000000, 0.000000, 1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136669, 0.206204, 0.548287, 1.000000, -0.000634, 0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.338990, 0.548287, 1.000000, -0.000634, 0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // -0.136585, 0.338991, 0.940471, 1.000000, -0.000634, 0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141596, 0.206200, 0.940471, 0.000000, 1.000000, 0.000010, 0.568627451,0.521568627,0.450980392,
+    //     // 0.141597, 0.338991, 0.940471, -1.000000, 0.000000, -0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.338990, 0.548287, -1.000000, 0.000000, -0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.206204, 0.548287, -1.000000, 0.000000, -0.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.141597, 0.338991, 0.940471, -0.000000, 0.000000, -1.000000, 0.580392157, 0.533333333, 0.462745098,
+    //     // 0.129591, 0.223447, 0.414529, 1.000000, 0.000826, -0.000481, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129506, 0.326281, 0.414529, 1.000000, 0.000826, -0.000481, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.326281, 0.591165, 1.000000, 0.000826, -0.000481, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.326281, 0.591165, 0.000000, 0.000000, 1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.326281, 0.414529, -1.000000, 0.000000, -0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.326281, 0.414529, -0.000000, -0.000000, -1.000000, 0.090196078,0.109803922,0.180392157,
+    //     // -0.127928, 0.223447, 0.414529, 0.000000, -1.000000, 0.000000, 0.090196078,0.109803922,0.180392157,
+    //     // 0.129591, 0.326281, 0.591165, 0.000000, 1.000000, -0.000000, 0.090196078,0.109803922,0.180392157
+    // ];
+
+    // var indicesCube = [
+    //     // 0, 1, 2,
+    //     // 3, 4, 5,
+    //     // 6, 7, 8,
+    //     // 9, 10, 11,
+    //     // 12, 13, 14,
+    //     // 15, 16, 17,
+    //     // 18, 19, 20,
+    //     // 21, 22, 23,
+    //     // 24, 25, 26,
+    //     // 27, 28, 29,
+    //     // 30, 31, 32,
+    //     // 33, 34, 35,
+    //     // 0, 36, 1,
+    //     // 37, 38, 39,
+    //     // 6, 40, 7,
+    //     // 41, 42, 43,
+    //     // 44, 45, 46,
+    //     // 15, 47, 16,
+    // // 48, 49, 50,
+    // // 21, 51, 22,
+    // // 24, 52, 25,
+    // // 27, 53, 28,
+    // // 30, 54, 31,
+    // // 33, 55, 34,
+
+    // // 56, 57, 58,
+    // // 59, 60, 61,
+    // // 62, 63, 64,
+    // // 65, 66, 67,
+    // // 68, 69, 70,
+    // // 71, 72, 73,
+    // // 56, 74, 57,
+    // // 59, 75, 60,
+    // // 62, 76, 63,
+    // // 65, 77, 66,
+    // // 68, 78, 69,
+    // // 71, 79, 72,
+
+    // // 80, 81, 82,
+    // // 83, 84, 85,
+    // // 86, 87, 88,
+    // // 89, 90, 91,
+    // // 92, 93, 94,
+    // // 95, 96, 97,
+    // // 98, 99, 100,
+    // // 101, 102, 103,
+    // // 104, 105, 106,
+    // // 107, 108, 109,
+    // // 110, 111, 112,
+    // // 113, 114, 115,
+    // // 80, 116, 81,
+    // // 83, 117, 84,
+    // // 118, 119, 120,
+    // // 89, 121, 90,
+    // // 122, 123, 124,
+    // // 95, 125, 96,
+    // // 126, 127, 128,
+    // // 101, 129, 102,
+    // // 104, 130, 105,
+    // // 107, 131, 108,
+    // // 110, 132, 111,
+    // // 113, 133, 114
+    // ];
+
     
    // var vertices = [...cube,...rightVertices]; 
-   var vertices = [...penghapusKanan, ...cubeLight, ...penghapusKiri];
+    
+  var vertices = [];
+    //var vertices = [...cube];
 
    var indices = [...indicesKanan, ...indicesCube, ...indicesKiri];
+   //var indices = [...indicesCube];
 
+   // Create a linked-list for storing the vertices data
    var vertexBuffer = gl.createBuffer();
    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
@@ -21,176 +229,241 @@ function main(){
    attribute vec3 aPosition;
    attribute vec3 aColor;
    attribute vec3 aNormal;
+   attribute float aShininessConstant;
    varying vec3 vColor;
    varying vec3 vNormal;
+   varying vec3 vPosition;
+   varying float vShininessConstant;
    uniform mat4 uModel;
    uniform mat4 uView;
    uniform mat4 uProjection;
    void main() {
-       gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2. / 3., 1.));
+       gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2. / 3., 1.25));
        vColor = aColor;
        vNormal = aNormal;
+       vPosition = (uModel * (vec4(aPosition * 2. / 3., 1.25))).xyz;
+       vShininessConstant = aShininessConstant;
    }
 `;
 
 var fragmentShaderSource = `
-   precision mediump float;
-   varying vec3 vColor;
-   varying vec3 vNormal;
-   uniform vec3 uLightConstant;        // It represents the light color
-   uniform float uAmbientIntensity;    // It represents the light intensity
-   uniform vec3 uLightDirection;
-   uniform mat3 uNormalModel;
-   void main() {
-       vec3 ambient = uLightConstant * uAmbientIntensity;
-       vec3 normalizedLight = normalize(uLightDirection);  // [2., 0., 0.] becomes a unit vector [1., 0., 0.]
-       vec3 normalizedNormal = normalize(uNormalModel * vNormal);
-       float cosTheta = dot(normalizedNormal, normalizedLight);
-       vec3 diffuse = vec3(0., 0., 0.);
-       if (cosTheta > 0.) {
-           float diffuseIntensity = cosTheta;
-           diffuse = uLightConstant * diffuseIntensity;
-       }
-       vec3 phong = ambient + diffuse; // + specular;
-       gl_FragColor = vec4(phong * vColor, 1.);
-   }
+precision mediump float;
+varying vec3 vColor;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying float vShininessConstant;
+uniform vec3 uLightConstant;        // It represents the light color
+uniform float uAmbientIntensity;    // It represents the light intensity
+// uniform vec3 uLightDirection;
+uniform vec3 uLightPosition;
+uniform mat3 uNormalModel;
+uniform vec3 uViewerPosition;
+void main() {
+    vec3 ambient = uLightConstant * uAmbientIntensity;
+    vec3 lightDirection = uLightPosition - vPosition;
+    vec3 normalizedLight = normalize(lightDirection);  // [2., 0., 0.] becomes a unit vector [1., 0., 0.]
+    vec3 normalizedNormal = normalize(uNormalModel * vNormal);
+    float cosTheta = dot(normalizedNormal, normalizedLight);
+    vec3 diffuse = vec3(0., 0., 0.);
+    if (cosTheta > 0.) {
+        float diffuseIntensity = cosTheta;
+        diffuse = uLightConstant * diffuseIntensity;
+    }
+    vec3 reflector = reflect(-lightDirection, normalizedNormal);
+    vec3 normalizedReflector = normalize(reflector);
+    vec3 normalizedViewer = normalize(uViewerPosition - vPosition);
+    float cosPhi = dot(normalizedReflector, normalizedViewer);
+    vec3 specular = vec3(0., 0., 0.);
+    if (cosPhi > 0.) {
+        float specularIntensity = pow(cosPhi, vShininessConstant); 
+        specular = uLightConstant * specularIntensity;
+    }
+    vec3 phong = ambient + diffuse + specular;
+    gl_FragColor = vec4(phong * vColor, 1.);
+}
 `;
 
-    // Create .c in GPU
-    var vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertexShader, vertexShaderSource);
-    var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(fragmentShader, fragmentShaderSource);
 
-    // Compile .c into .o
-    gl.compileShader(vertexShader);
-    gl.compileShader(fragmentShader);
+// Create .c in GPU
+var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShader, vertexShaderSource);
+var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShader, fragmentShaderSource);
 
-    // Prepare a .exe shell (shader program)
-    var shaderProgram = gl.createProgram();
+// Compile .c into .o
+gl.compileShader(vertexShader);
+gl.compileShader(fragmentShader);
 
-    // Put the two .o files into the shell
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
+let compiled = gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)         
+if (!compiled) {
+    console.error(gl.getShaderInfoLog(vertexShader))
+}
 
-    // Link the two .o files, so together they can be a runnable program/context.
-    gl.linkProgram(shaderProgram);
+// Prepare a .exe shell (shader program)
+var shaderProgram = gl.createProgram();
 
-    // Start using the context (analogy: start using the paints and the brushes)
-    gl.useProgram(shaderProgram);
+// Put the two .o files into the shell
+gl.attachShader(shaderProgram, vertexShader);
+gl.attachShader(shaderProgram, fragmentShader);
 
-    // Teach the computer how to collect
-    //  the positional values from ARRAY_BUFFER
-    //  to each vertex being processed
-    var aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
-    gl.vertexAttribPointer(
+// Link the two .o files, so together they can be a runnable program/context.
+gl.linkProgram(shaderProgram);
+
+// Start using the context (analogy: start using the paints and the brushes)
+gl.useProgram(shaderProgram);
+
+// Teach the computer how to collect
+//  the positional values from ARRAY_BUFFER
+//  to each vertex being processed
+var aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
+gl.vertexAttribPointer(
     aPosition, 
     3, 
     gl.FLOAT, 
     false, 
-    9 * Float32Array.BYTES_PER_ELEMENT, 
+    10 * Float32Array.BYTES_PER_ELEMENT, 
     0
-    );
-    gl.enableVertexAttribArray(aPosition);
-    var aColor = gl.getAttribLocation(shaderProgram, "aColor");
-    gl.vertexAttribPointer(
+);
+gl.enableVertexAttribArray(aPosition);
+
+var aColor = gl.getAttribLocation(shaderProgram, "aColor");
+gl.vertexAttribPointer(
     aColor, 
     3, 
     gl.FLOAT, 
     false, 
-    9 * Float32Array.BYTES_PER_ELEMENT, 
+    10 * Float32Array.BYTES_PER_ELEMENT, 
     6 * Float32Array.BYTES_PER_ELEMENT
-    );
-    gl.enableVertexAttribArray(aColor);
-    var aNormal = gl.getAttribLocation(shaderProgram, "aNormal");
-    gl.vertexAttribPointer(
+);
+gl.enableVertexAttribArray(aColor);
+var aNormal = gl.getAttribLocation(shaderProgram, "aNormal");
+gl.vertexAttribPointer(
     aNormal, 
     3, 
     gl.FLOAT, 
     false, 
-    9 * Float32Array.BYTES_PER_ELEMENT, 
+    10 * Float32Array.BYTES_PER_ELEMENT, 
     3 * Float32Array.BYTES_PER_ELEMENT
-    );
-    gl.enableVertexAttribArray(aNormal);
+);
+gl.enableVertexAttribArray(aNormal);
 
-    // Define the lighting and shading
-    var uAmbientConstant = gl.getUniformLocation(shaderProgram, "uAmbientConstant");
-    var uAmbientIntensity = gl.getUniformLocation(shaderProgram, "uAmbientIntensity");
-    gl.uniform3fv(uAmbientConstant, [1.0, 1.0, 1.0]);   // WHITE light
-    gl.uniform1f(uAmbientIntensity, 0.311) // light intensity: 40%
+var aShininessConstant = gl.getAttribLocation(shaderProgram, "aShininessConstant");
+gl.vertexAttribPointer(
+    aShininessConstant, 
+    1, 
+    gl.FLOAT, 
+    false, 
+    10 * Float32Array.BYTES_PER_ELEMENT, 
+    9 * Float32Array.BYTES_PER_ELEMENT
+);
+gl.enableVertexAttribArray(aShininessConstant);
 
-    //Connect the uniform transformation matrices
-    var uModel = gl.getUniformLocation(shaderProgram, "uModel");
-    var uView = gl.getUniformLocation(shaderProgram, "uView");
-    var uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
+// Connect the uniform transformation matrices
+var uModel = gl.getUniformLocation(shaderProgram, "uModel");
+var uView = gl.getUniformLocation(shaderProgram, "uView");
+var uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
 
-    // Set the projection matrix in the vertex shader
-    var projection = glMatrix.mat4.create();
-    glMatrix.mat4.perspective(
-        projection,
-        Math.PI / 3,
-        1,
-        0.5,
-        10
-    );
-    gl.uniformMatrix4fv(uProjection, false, projection);
+// Set the projection matrix in the vertex shader
+var projection = glMatrix.mat4.create();
+glMatrix.mat4.perspective(
+   projection,
+   Math.PI / 3,    // field of view
+   1,              // ratio
+   0.5,            // near clip
+   10              // far clip
+);
+gl.uniformMatrix4fv(uProjection, false, projection);
 
-    // Set the view matrix in the vertex shader
-    var view = glMatrix.mat4.create();
-    glMatrix.mat4.lookAt(
-        view,
-        [0, 0, 2],
-        [0, 0, 0],
-        [0, 1, 0]
-    );
-    gl.uniformMatrix4fv(uView, false, view);
+// Set the view matrix in the vertex shader
+var view = glMatrix.mat4.create();
+var camera = [0, 0, 3];
+var camupdate = [0, 0, 0];
+glMatrix.mat4.lookAt(
+   view,
+   camera,      // camera position
+   camupdate,      // the point where camera looks at
+   [0, 1, 0]       // up vector of the camera
+);
+gl.uniformMatrix4fv(uView, false, view);
 
-    var freeze = false;
-    // Apply some interaction using mouse
-    function onMouseClick(event) {
-        freeze = !freeze;
-    }
-    document.addEventListener("click", onMouseClick, false);
+// Define the lighting and shading
+var uLightConstant = gl.getUniformLocation(shaderProgram, "uLightConstant");
+var uAmbientIntensity = gl.getUniformLocation(shaderProgram, "uAmbientIntensity");
+gl.uniform3fv(uLightConstant, [1.0, 1.0, 1.0]);   // orange light
+gl.uniform1f(uAmbientIntensity, 0.311) // light intensity: 40%
+//var uLightDirection = gl.getUniformLocation(shaderProgram, "uLightDirection");
+//gl.uniform3fv(uLightDirection, [2.0, 0.0, 0.0]);    // light comes from the right side
 
-    function onKeydown(event) {
-        if (event.keyCode == 32) freeze = true;
-    }
-    function onKeyup(event) {
-        if (event.keyCode == 32) freeze = false;
-    }
-    document.addEventListener("keydown", onKeydown, false);
-    document.addEventListener("keyup", onKeyup, false);
+var uLightPosition = gl.getUniformLocation(shaderProgram, "uLightPosition");
+var lightPosition = [0.025, 0.11, -0.025];
+gl.uniform3fv(uLightPosition, lightPosition);
 
+var uNormalModel = gl.getUniformLocation(shaderProgram, "uNormalModel");
+var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
+gl.uniform3fv(uViewerPosition, camera);
 
-    var speed = [2/600, 2/600, 0];
-    var change = [0, 0, 0];
+var cubes = [...cubeLight];
 
-    function render() {
-
-        if (!freeze) { // If it is not freezing, then animate the rectangle
-            if (change[0] >= 0.5 || change[0] <= -0.5) speed[0] = -speed[0];
-            if (change[1] >= 0.5 || change[1] <= -0.5) speed[1] = -speed[1];
-            change[0] = change[0] + speed[0];
-            change[1] = change[1] + speed[1];
-            // Init the model matrix
-            var model = glMatrix.mat4.create();
-            // Define a rotation matrix about x axis and store it to the model matrix
-             glMatrix.mat4.rotate(model, model, change[0], [1, 0, 0]);
-            // // Define a rotation matrix about y axis and store it to the model matrix
-             glMatrix.mat4.rotate(model, model, change[1], [0, 1, 0]);
-            // Define a translation matrix and store it to the model matrix
-             glMatrix.mat4.translate(model, model, change);
-            // Set the model matrix in the vertex shader
-            gl.uniformMatrix4fv(uModel, false, model);
-            // Reset the frame buffer
-            gl.enable(gl.DEPTH_TEST);
-            gl.clearColor(0.1, 0.1, 0.1, 1.0);
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-            // gl.drawArrays(primitive, offset, nVertex);
-            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-            
+function onKeyPressed(event) {
+    
+    if(event.keyCode == 83) { //ini tombol S
+        for(let i=0;i<cubes.length;i+=10) {
+            vertices[i+1] -= 0.5;
+            lightPosition[1] -= 0.5 * 0.06;
         }
-        requestAnimationFrame(render);
     }
-    requestAnimationFrame(render);
+
+    else if(event.keyCode == 87) { // ini tombol W
+        for(let i=0;i<cubes.length;i+=10) {
+            vertices[i+1] += 0.042;
+            lightPosition[1] += 0.042 * 0.06;
+        }
+    }
+    else if(event.keyCode == 65) { // ini tombol A
+        camera[0] -= 0.5;
+        camupdate[0] -= 0.5;
+        glMatrix.mat4.lookAt(
+            view,
+            camera,      // camera position
+            camupdate,      // the point where camera looks at
+            [0, 1, 0]       // up vector of the camera
+        );
+        gl.uniformMatrix4fv(uView, false, view);
+    }
+    else if(event.keyCode == 68) { //ini tombol D
+        camera[0] += 0.5;
+        camupdate[0] += 0.5;
+        glMatrix.mat4.lookAt(
+            view,
+            camera,      // camera position
+            camupdate,      // the point where camera looks at
+            [0, 1, 0]       // up vector of the camera
+        );
+        gl.uniformMatrix4fv(uView, false, view);
+    }
+}
+
+document.addEventListener("keydown",onKeyPressed,false);
+
+function render() {
+        vertices = [...penghapusKanan, ...cubeLight, ...penghapusKiri];
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        gl.uniform3fv(uLightPosition, lightPosition);
+       // Init the model matrix
+       var model = glMatrix.mat4.create();
+       gl.uniformMatrix4fv(uModel, false, model);
+       // Set the model matrix for normal vector
+       var normalModel = glMatrix.mat3.create();
+       glMatrix.mat3.normalFromMat4(normalModel, model);
+       gl.uniformMatrix3fv(uNormalModel, false, normalModel);
+       // Reset the frame buffer
+       gl.enable(gl.DEPTH_TEST);
+       gl.clearColor(0.1, 0.1, 0.1, 1.0);
+       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+       requestAnimationFrame(render);
+    }
+
+requestAnimationFrame(render);
 }
