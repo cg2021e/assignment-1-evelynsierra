@@ -193,54 +193,10 @@ var uNormalModel = gl.getUniformLocation(shaderProgram, "uNormalModel");
 var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
 gl.uniform3fv(uViewerPosition, camera);
 
-var cubes = [...cubeLight];
-
-function onKeyPressed(event) {
-    
-    if(event.keyCode == 83) { //ini tombol S
-        for(let i=0;i<cubes.length;i+=10) {
-            cubes[i+1] -= 0.5;
-            lightPosition[1] -= 0.5 * 0.06;
-        }
-    }
-
-    else if(event.keyCode == 87) { // ini tombol W
-        for(let i=0;i<cubes.length;i+=10) {
-            cubes[i+1] += 0.042;
-            lightPosition[1] += 0.042 * 0.06;
-        }
-    }
-    else if(event.keyCode == 65) { // ini tombol A
-        camera[0] -= 0.5;
-        camupdate[0] -= 0.5;
-        glMatrix.mat4.lookAt(
-            view,
-            camera,      // camera position
-            camupdate,      // the point where camera looks at
-            [0, 1, 0]       // up vector of the camera
-        );
-        gl.uniformMatrix4fv(uView, false, view);
-    }
-    else if(event.keyCode == 68) { //ini tombol D
-        camera[0] += 0.5;
-        camupdate[0] += 0.5;
-        glMatrix.mat4.lookAt(
-            view,
-            camera,      // camera position
-            camupdate,      // the point where camera looks at
-            [0, 1, 0]       // up vector of the camera
-        );
-        gl.uniformMatrix4fv(uView, false, view);
-    }
-}
-
-document.addEventListener("keydown",onKeyPressed,false);
 
 function render() {
         vertices = [...penghapusKanan, ...cubes, ...penghapusKiri];
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-        gl.uniform3fv(uLightPosition, lightPosition);
+    
        // Init the model matrix
        var model = glMatrix.mat4.create();
        gl.uniformMatrix4fv(uModel, false, model);
