@@ -280,13 +280,15 @@ document.addEventListener("mouseup", onMouseUp, false);
 document.addEventListener("mousemove", onMouseMove, false);
 
 var cubes = [...cubeLight];
+var cameraTurn = 90;
+var cameraDistance = 3;
 
 //BUKA LAMPU
 var uLightOnValue = 1.;
 var uLightOn = gl.getUniformLocation(shaderProgram, "uLightOn");
 
 function onKeyPressed(event) {
-    if(event.keyCode == 32) {
+    if(event.keyCode == 32) { //tekan spasi
         if(uLightOnValue == 0.) {
             uLightOnValue = 1.;
         } else if(uLightOnValue == 1.) {
@@ -294,8 +296,88 @@ function onKeyPressed(event) {
         }
         gl.uniform1f(uLightOn, uLightOnValue);
     }
+    // atur cube dan kamera
+    else if(event.keyCode == 83) { //ini tombol S
+        for(let i=0;i<cubes.length;i+=10) {
+            cubes[i+2] += 0.0111; //mengganti arah lampu
+            
+        }
+        lightPosition[2] += 0.0111 * 0.06;
+    }
+
+    else if(event.keyCode == 87) { // ini tombol W
+        for(let i=0;i<cubes.length;i+=10) {
+            cubes[i+2] -= 0.0111;
+            
+        }
+        lightPosition[2] -= 0.0111 * 0.06;
+    }
+    else if(event.keyCode == 65) { // ini tombol A
+        for(let i=0;i<cubes.length;i+=10) {
+            cubes[i] -= 0.0111; //mengganti arah lampu
+            
+        }
+        lightPosition[1] -= 0.0111 * 0.06;
+    }
+    else if(event.keyCode == 68) { //ini tombol D
+        for(let i=0;i<cubes.length;i+=10) {
+            cubes[i] += 0.0111; //mengganti arah lampu
+           
+        }
+        lightPosition[1] += 0.0111 * 0.06;
+    }
+    else if(event.keyCode == 38) { //ini tombol Up
+        camera[2] -= 0.0111;
+            camupdate[2] -= 0.0111; //mengganti linear 
+            glMatrix.mat4.lookAt(
+                view,
+                camera,      // camera position
+                camupdate,      // the point where camera looks at
+                [0, 1, 0]       // up vector of the camera
+            );
+            gl.uniformMatrix4fv(uView, false, view);
+    }
+    else if(event.keyCode == 40) { //ini tombol Down
+        camera[2] += 0.0111;
+            camupdate[2] += 0.0111; //mengganti linear 
+            glMatrix.mat4.lookAt(
+                view,
+                camera,      // camera position
+                camupdate,      // the point where camera looks at
+                [0, 1, 0]       // up vector of the camera
+            );
+            gl.uniformMatrix4fv(uView, false, view);
+    }
+    else if(event.keyCode == 37) { //ini tombol Left
+        cameraTurn += 0.5;
+        let cos = Math.cos(cameraTurn*Math.PI/180.0);
+        let sin = Math.sin(cameraTurn*Math.PI/180.0);
+        camera = [cameraDistance*cos, 0, cameraDistance*sin];
+        glMatrix.mat4.lookAt(
+                view,
+                camera,      // camera position
+                camupdate,      // the point where camera looks at
+                [0, 1, 0]       // up vector of the camera
+        );
+        gl.uniformMatrix4fv(uView, false, view);
+    }
+    else if(event.keyCode == 39) { //ini tombol Right
+        cameraTurn -= 0.5;
+        let cos = Math.cos(cameraTurn*Math.PI/180.0);
+        let sin = Math.sin(cameraTurn*Math.PI/180.0);
+            camera = [cameraDistance*cos, 0, cameraDistance*sin];
+            glMatrix.mat4.lookAt(
+                view,
+                camera,      // camera position
+                camupdate,      // the point where camera looks at
+                [0, 1, 0]       // up vector of the camera
+            );
+            gl.uniformMatrix4fv(uView, false, view);
+    }
 }
 document.addEventListener("keydown", onKeyPressed);
+
+//geser dan zoom in zoom out
 
 function render() {
         vertices = [...penghapusKanan, ...cubes, ...penghapusKiri, ...planeVertices,];
