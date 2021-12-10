@@ -4,7 +4,7 @@ function main(){
     
     var vertices = [];
 
-   var indices = [...indicesKanan, ...indicesCube, ...indicesKiri];
+   var indices = [...indicesKanan, ...indicesCube, ...indicesKiri, ...planeIndices];
 
    // Create a linked-list for storing the vertices data
    var vertexBuffer = gl.createBuffer();
@@ -193,10 +193,12 @@ var uNormalModel = gl.getUniformLocation(shaderProgram, "uNormalModel");
 var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
 gl.uniform3fv(uViewerPosition, camera);
 
+var cubes = [...cubeLight];
 
 function render() {
-        vertices = [...penghapusKanan, ...cubes, ...penghapusKiri];
-    
+        vertices = [...penghapusKanan, ...cubes, ...penghapusKiri, ...planeVertices,];
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
        // Init the model matrix
        var model = glMatrix.mat4.create();
        gl.uniformMatrix4fv(uModel, false, model);
@@ -206,7 +208,7 @@ function render() {
        gl.uniformMatrix3fv(uNormalModel, false, normalModel);
        // Reset the frame buffer
        gl.enable(gl.DEPTH_TEST);
-       gl.clearColor(0.1, 0.1, 0.1, 1.0);
+       gl.clearColor(0.52, 0.1, 0.1, 1.0);
        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
        gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
        requestAnimationFrame(render);
