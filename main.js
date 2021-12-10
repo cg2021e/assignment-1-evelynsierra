@@ -49,6 +49,7 @@ uniform float uAmbientIntensity;    // It represents the light intensity
 uniform vec3 uLightPosition;
 uniform mat3 uNormalModel;
 uniform vec3 uViewerPosition;
+uniform float uLightOn;
 void main() {
     vec3 ambient = uLightConstant * uAmbientIntensity;
     vec3 lightDirection = uLightPosition - vPosition;
@@ -56,7 +57,7 @@ void main() {
     vec3 normalizedNormal = normalize(uNormalModel * vNormal);
     float cosTheta = dot(normalizedNormal, normalizedLight);
     vec3 diffuse = vec3(0., 0., 0.);
-    if (cosTheta > 0.) {
+    if (uLightOn == 1. && cosTheta > 0.) {
         float diffuseIntensity = cosTheta;
         diffuse = uLightConstant * diffuseIntensity;
     }
@@ -65,7 +66,7 @@ void main() {
     vec3 normalizedViewer = normalize(uViewerPosition - vPosition);
     float cosPhi = dot(normalizedReflector, normalizedViewer);
     vec3 specular = vec3(0., 0., 0.);
-    if (cosPhi > 0.) {
+    if (uLightOn == 1. && cosPhi > 0.) {
         float specularIntensity = pow(cosPhi, vShininessConstant); 
         specular = uLightConstant * specularIntensity;
     }
@@ -165,6 +166,8 @@ glMatrix.mat4.perspective(
 );
 gl.uniformMatrix4fv(uProjection, false, projection);
 
+
+
 // Set the view matrix in the vertex shader
 var view = glMatrix.mat4.create();
 var camera = [0, 0, 3];
@@ -194,6 +197,22 @@ var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
 gl.uniform3fv(uViewerPosition, camera);
 
 var cubes = [...cubeLight];
+
+//BUKA LAMPU
+var uLightOnValue = 1.;
+var uLightOn = gl.getUniformLocation(shaderProgram, "uLightOn");
+
+function onKeyPressed(event) {
+    if(event.keyCode == 32) {
+        if(uLightOnValue == 0.) {
+            uLightOnValue = 1.;
+        } else if(uLightOnValue == 1.) {
+            uLightOnValue = 0.;
+        }
+        gl.uniform1f(uLightOn, uLightOnValue);
+    }
+}
+document.addEventListener("keydown", onKeyPressed);
 
 function render() {
         vertices = [...penghapusKanan, ...cubes, ...penghapusKiri, ...planeVertices,];
